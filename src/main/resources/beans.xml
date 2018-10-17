@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<!-- Inyecta el texto, el cual es implementado en la clase. -->
+	<bean id="proveedorSaludo" class="com.udemy.springlocal.desafio.ProveedorSaludoImpl">
+		<property name="saludo" value="Buenos días, Spring!!" />
+	</bean>
+	
+	<!-- Inyecta un bean dentro de otro. -->
+	<!-- name: nombre de la variable definida dentro de la clase -->
+	<!-- ref: Referencia del bean inyectado. Es una interfaz. -->
+	<bean id="proveedorMensaje" class="com.udemy.springlocal.desafio.ProveedorMensajeImpl">
+		<property name="proveedorSaludo" ref="proveedorSaludo" />
+	</bean>
+	
+	<bean id="renderer" class="com.udemy.springlocal.desafio.ImprimeMensajeImpl">
+		<property name="proveedorMensaje" ref="proveedorMensaje" />
+	</bean>
+</beans>
